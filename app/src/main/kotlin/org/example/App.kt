@@ -3,13 +3,41 @@
  */
 package org.example
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
+import java.io.File
+import java.nio.file.Paths
+
+fun printWorkingDirectory() {
+    println(Paths.get("").toAbsolutePath().toString())
+}
+
+class Repository(
+    path: String,
+) {
+    private val files: List<File> = File(path).walk().toList()
+
+    init {
+        println("Repository detected: $path")
+    }
+
+    fun printFileCount() {
+        val fileCount = files.size
+        val typeScriptFileCount = files.filter { it.extension == "ts" }.size
+        println("Number of files in repository: $fileCount")
+        println("Number of TypeScript files in repository: $typeScriptFileCount")
+    }
 }
 
 fun main() {
-    println(App().greeting)
+    printWorkingDirectory()
+
+    File("repositories")
+        .list()!!
+        .filter {
+            // Filter hidden folders
+            !it.startsWith(".")
+        }.map {
+            Repository("repositories/$it")
+        }.forEach {
+            it.printFileCount()
+        }
 }

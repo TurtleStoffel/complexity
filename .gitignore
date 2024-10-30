@@ -6,3 +6,6 @@ build
 
 # Ignore IntelliJ folder
 .idea
+
+# Ignore downloaded repositories
+repositories
