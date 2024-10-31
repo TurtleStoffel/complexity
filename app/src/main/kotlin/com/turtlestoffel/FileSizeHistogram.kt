@@ -1,21 +1,20 @@
 package com.turtlestoffel
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-
-@Serializable
-data class TestData(
-    val values: List<Int>,
-)
-
 class FileSizeHistogram(
     private val sourceFiles: List<SourceFile>,
 ) {
     fun calculate() {
-        val histogram = sourceFiles.map { it.getNumberOfLines() }.sorted()
-        val data = TestData(histogram)
+        val orderedFileSizes = sourceFiles.map { it.getNumberOfLines() }.sorted()
 
-        writeToFile("data/histogram.json", Json.encodeToString(data))
+        val bins = listOf(Pair(0, 50), Pair(51, 100), Pair(101, 250), Pair(251, 500), Pair(501, Int.MAX_VALUE))
+
+        val histogram =
+            bins.map { bin ->
+                orderedFileSizes.count { it in bin.first..bin.second }
+            }
+
+        histogram.zip(bins).forEach { (count, bin) ->
+            println("[${bin.first}-${bin.second}]: $count")
+        }
     }
 }

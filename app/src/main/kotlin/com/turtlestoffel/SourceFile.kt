@@ -11,7 +11,7 @@ class SourceFile(
     }
 
     init {
-        println("Read source file at path ${file.path} with content $content")
+        println("Read source file at path ${file.path}")
     }
 
     fun getNumberOfLines(): Int {
