@@ -19,5 +19,6 @@ fun main() {
             Repository("repositories/$it")
         }.forEach {
             it.printFileCount()
+            it.printStatistics()
         }
 }

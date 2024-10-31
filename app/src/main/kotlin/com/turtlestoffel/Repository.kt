@@ -29,4 +29,8 @@ class Repository(
         println("Number of files in repository: $fileCount")
         println("Number of TypeScript files in repository: $typeScriptFileCount")
     }
+
+    fun printStatistics() {
+        sourceFiles.forEach { it.calculateNewLines() }
+    }
 }
