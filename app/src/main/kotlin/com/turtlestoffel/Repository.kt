@@ -5,7 +5,19 @@ import java.io.File
 class Repository(
     path: String,
 ) {
-    private val files: List<File> = File(path).walk().toList()
+    // Only process a subset of files to prevent running out of memory in a big repository
+    private val files: List<File> =
+        File(path)
+            .walk()
+            .toList()
+            .shuffled()
+            .take(100)
+    private val sourceFiles: List<SourceFile> =
+        files
+            .filter {
+                // Ignore directories
+                it.isFile
+            }.map { SourceFile(it) }
 
     init {
         println("Repository detected: $path")
