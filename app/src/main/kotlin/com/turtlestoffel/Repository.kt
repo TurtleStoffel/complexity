@@ -12,7 +12,7 @@ class Repository(
             .toList()
             .shuffled()
             .take(100)
-    private val sourceFiles: List<SourceFile> =
+    val sourceFiles: List<SourceFile> =
         files
             .filter {
                 // Ignore directories
@@ -31,6 +31,6 @@ class Repository(
     }
 
     fun printStatistics() {
-        sourceFiles.forEach { it.calculateNewLines() }
+        sourceFiles.forEach { it.getNumberOfLines() }
     }
 }

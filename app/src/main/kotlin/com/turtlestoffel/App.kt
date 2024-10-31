@@ -20,5 +20,6 @@ fun main() {
         }.forEach {
             it.printFileCount()
             it.printStatistics()
+            FileSizeHistogram(it.sourceFiles).calculate()
         }
 }

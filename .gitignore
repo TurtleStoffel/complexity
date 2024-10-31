@@ -9,3 +9,6 @@ build
 
 # Ignore downloaded repositories
 repositories
+
+# Ignore data folder with calculated data
+data
