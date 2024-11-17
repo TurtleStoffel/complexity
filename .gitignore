@@ -1,6 +1,5 @@
 # Ignore Gradle project-specific cache directory
 .gradle
-
 # Ignore Gradle build output directory
 build
 
@@ -12,3 +11,6 @@ repositories
 
 # Ignore data folder with calculated data
 data
+
+# Ignore MacOS .DS_Store files
+.DS_Store
