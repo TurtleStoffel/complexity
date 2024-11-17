@@ -10,6 +10,8 @@ fun printWorkingDirectory() {
 fun main() {
     printWorkingDirectory()
 
+    RepositoryManager.loadConfig()
+
     File("repositories")
         .list()!!
         .filter {
