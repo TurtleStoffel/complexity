@@ -1,6 +1,5 @@
 package com.turtlestoffel
 
-import java.io.File
 import java.nio.file.Paths
 
 fun printWorkingDirectory() {
@@ -10,8 +9,9 @@ fun printWorkingDirectory() {
 fun main() {
     printWorkingDirectory()
 
-    RepositoryManager.loadConfig()
+    RepositoryManager.validate()
 
+    /*
     File("repositories")
         .list()!!
         .filter {
@@ -24,4 +24,5 @@ fun main() {
             it.printStatistics()
             FileSizeHistogram(it.sourceFiles).calculate()
         }
+     */
 }
