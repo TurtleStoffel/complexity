@@ -5,15 +5,13 @@ import java.io.File
 class Repository(
     path: String,
 ) {
-    private val files: List<File> =
+    private val sourceFiles: List<SourceFile> =
         File(path)
             .walk()
             .onEnter {
                 // Ignore hidden directories such as .git
                 !it.name.startsWith(".")
             }.toList()
-    private val sourceFiles: List<SourceFile> =
-        files
             .filter {
                 // Ignore directories
                 it.isFile
@@ -27,7 +25,7 @@ class Repository(
     }
 
     fun printFileCount() {
-        val fileCount = files.size
+        val fileCount = sourceFiles.size
         val filesByExtension = sourceFiles.groupBy { it.extension }.mapValues { it.value.size }
         val typeScriptFileCount = filesByExtension["ts"] ?: 0
         println("Files by extension: $filesByExtension")
