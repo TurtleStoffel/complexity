@@ -14,9 +14,7 @@ data class RepositoryConfiguration(
 
 class RepositoryManager {
     companion object {
-        fun validate() {
-            val config = loadConfig()
-
+        fun validate(config: RepositoryConfiguration) {
             // Check if configured repositories exist in repositories folder
             val repositories =
                 File(REPOSITORIES_FOLDER)
@@ -37,7 +35,7 @@ class RepositoryManager {
             }
         }
 
-        private fun loadConfig(): RepositoryConfiguration {
+        fun loadConfig(): RepositoryConfiguration {
             val configFile = this::class.java.getResource(REPOSITORIES_CONFIGURATION_RESOURCE)
 
             requireNotNull(configFile) { "No configuration file exists for the Repository Manager" }

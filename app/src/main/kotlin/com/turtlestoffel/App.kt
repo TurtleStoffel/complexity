@@ -9,7 +9,9 @@ fun printWorkingDirectory() {
 fun main() {
     printWorkingDirectory()
 
-    RepositoryManager.validate()
+    val repositoryConfiguration = RepositoryManager.loadConfig()
+
+    RepositoryManager.validate(repositoryConfiguration)
 
     /*
     File("repositories")
