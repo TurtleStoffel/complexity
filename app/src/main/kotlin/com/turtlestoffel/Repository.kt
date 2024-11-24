@@ -12,7 +12,7 @@ class Repository(
                 // Ignore hidden directories such as .git
                 !it.name.startsWith(".")
             }.toList()
-    val sourceFiles: List<SourceFile> =
+    private val sourceFiles: List<SourceFile> =
         files
             .filter {
                 // Ignore directories
