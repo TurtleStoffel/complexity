@@ -22,8 +22,8 @@ fun main() {
         }.map {
             Repository("repositories/$it")
         }.forEach {
-            it.printFileCount()
             it.printStatistics()
+            it.printFileCount()
             // FileSizeHistogram(it.sourceFiles).calculate()
         }
 }

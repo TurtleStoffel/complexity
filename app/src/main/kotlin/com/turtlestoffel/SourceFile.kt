@@ -7,11 +7,13 @@ const val IMPORT_KEYWORD = "import"
 class SourceFile(
     file: File,
 ) {
+    val extension = file.extension
+
     private val content: String = file.readText()
     private val newLines: Int by lazy {
         content.count { it == '\n' }
     }
-    private val imports: Int by lazy {
+    private val numberOfImportStatements: Int by lazy {
         content.windowed(IMPORT_KEYWORD.length).count { it == IMPORT_KEYWORD }
     }
 
@@ -25,7 +27,7 @@ class SourceFile(
     }
 
     fun getNumberOfImports(): Int {
-        println("Number of imports in file: $imports")
-        return imports
+        println("Number of imports in file: $numberOfImportStatements")
+        return numberOfImportStatements
     }
 }

@@ -28,7 +28,9 @@ class Repository(
 
     fun printFileCount() {
         val fileCount = files.size
-        val typeScriptFileCount = files.filter { it.extension == "ts" }.size
+        val filesByExtension = sourceFiles.groupBy { it.extension }.mapValues { it.value.size }
+        val typeScriptFileCount = filesByExtension["ts"] ?: 0
+        println("Files by extension: $filesByExtension")
         println("Number of files in repository: $fileCount")
         println("Number of TypeScript files in repository: $typeScriptFileCount")
     }
