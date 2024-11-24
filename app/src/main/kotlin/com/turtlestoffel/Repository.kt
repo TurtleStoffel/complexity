@@ -34,6 +34,9 @@ class Repository(
     }
 
     fun printStatistics() {
-        sourceFiles.forEach { it.getNumberOfLines() }
+        sourceFiles.forEach {
+            it.getNumberOfLines()
+            it.getNumberOfImports()
+        }
     }
 }
