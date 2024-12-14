@@ -8,6 +8,7 @@ class SourceFile(
     file: File,
 ) {
     val extension = file.extension
+    val path = file.path
 
     private val content: String = file.readText()
     private val newLines: Int by lazy {

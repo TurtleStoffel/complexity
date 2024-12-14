@@ -5,7 +5,7 @@ import java.io.File
 class Repository(
     path: String,
 ) {
-    private val sourceFiles: List<SourceFile> =
+    val sourceFiles: List<SourceFile> =
         File(path)
             .walk()
             .onEnter {
