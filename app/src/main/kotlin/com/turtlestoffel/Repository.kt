@@ -5,7 +5,7 @@ import java.io.File
 class Repository(
     path: String,
 ) {
-    val sourceFiles: List<SourceFile> =
+    val repositoryFiles: List<RepositoryFile> =
         File(path)
             .walk()
             .onEnter {
@@ -17,7 +17,7 @@ class Repository(
                 it.isFile
             }.map {
                 println("Processing file: ${it.path}")
-                SourceFile(it)
+                RepositoryFile(it)
             }
 
     init {
@@ -25,8 +25,8 @@ class Repository(
     }
 
     fun printFileCount() {
-        val fileCount = sourceFiles.size
-        val filesByExtension = sourceFiles.groupBy { it.extension }.mapValues { it.value.size }
+        val fileCount = repositoryFiles.size
+        val filesByExtension = repositoryFiles.groupBy { it.extension }.mapValues { it.value.size }
         val typeScriptFileCount = filesByExtension["ts"] ?: 0
         println("Files by extension: $filesByExtension")
         println("Number of files in repository: $fileCount")
@@ -34,7 +34,7 @@ class Repository(
     }
 
     fun printStatistics() {
-        sourceFiles.forEach {
+        repositoryFiles.forEach {
             it.getNumberOfLines()
             it.getNumberOfImports()
         }
