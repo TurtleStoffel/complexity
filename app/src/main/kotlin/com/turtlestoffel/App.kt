@@ -14,7 +14,7 @@ fun writeMetricsToFile(metrics: List<SizeMetric>) {
 
     println("Writing metrics to file $content")
 
-    writeToFile("metrics.json", content)
+    writeToFile("data/metrics.json", content)
 }
 
 fun main() {
