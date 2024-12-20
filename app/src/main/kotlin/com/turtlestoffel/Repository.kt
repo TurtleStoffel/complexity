@@ -17,7 +17,11 @@ class Repository(
                 it.isFile
             }.map {
                 println("Processing file: ${it.path}")
-                RepositoryFile(it)
+                if (extensionMapper(it.extension) == FileType.CODE) {
+                    CodeFile(it)
+                } else {
+                    UnknownFile(it)
+                }
             }
 
     init {
@@ -35,8 +39,17 @@ class Repository(
 
     fun printStatistics() {
         repositoryFiles.forEach {
-            it.getNumberOfLines()
-            it.getNumberOfImports()
+            when (it) {
+                is CodeFile -> {
+                    println("Code file detected: ${it.path}")
+                    it.getNumberOfLines()
+                    it.getNumberOfImports()
+                }
+                is UnknownFile -> {
+                    println("Unknown file detected: ${it.path}")
+                }
+                else -> throw IllegalArgumentException("Unsupported file type")
+            }
         }
     }
 }

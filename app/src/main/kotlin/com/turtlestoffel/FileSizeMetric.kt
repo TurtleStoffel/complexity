@@ -9,14 +9,14 @@ data class SizeMetric(
 )
 
 class FileSizeMetric(
-    private val repositoryFiles: List<RepositoryFile>,
+    private val codeFiles: List<CodeFile>,
 ) {
     fun calculate(): List<SizeMetric> {
-        return repositoryFiles.map { SizeMetric(it.path, it.getNumberOfLines()) }
+        return codeFiles.map { SizeMetric(it.path, it.getNumberOfLines()) }
     }
 
     fun calculateHistogram() {
-        val orderedFileSizes = repositoryFiles.map { it.getNumberOfLines() }
+        val orderedFileSizes = codeFiles.map { it.getNumberOfLines() }
 
         val bins = listOf(Pair(0, 50), Pair(51, 100), Pair(101, 250), Pair(251, 500), Pair(501, Int.MAX_VALUE))
         val histogram =

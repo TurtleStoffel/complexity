@@ -34,7 +34,7 @@ fun main() {
         }.forEach {
             it.printStatistics()
             it.printFileCount()
-            val metrics = FileSizeMetric(it.repositoryFiles).calculate()
+            val metrics = FileSizeMetric(it.repositoryFiles.filterIsInstance<CodeFile>()).calculate()
             writeMetricsToFile(metrics)
             //FileSizeMetric(it.sourceFiles).calculateHistogram()
         }
