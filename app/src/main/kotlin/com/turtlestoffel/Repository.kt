@@ -1,5 +1,8 @@
 package com.turtlestoffel
 
+import com.turtlestoffel.files.CodeFile
+import com.turtlestoffel.files.RepositoryFile
+import com.turtlestoffel.files.UnknownFile
 import java.io.File
 
 class Repository(
