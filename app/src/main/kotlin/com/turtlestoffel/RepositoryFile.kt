@@ -11,7 +11,7 @@ open class RepositoryFile(
     file: File,
 ) {
     val extension = file.extension
-    val path: String = file.path
+    val path: String = file.path.removePrefix("repositories/")
 
     protected val content: String by lazy {
         file.readText()
