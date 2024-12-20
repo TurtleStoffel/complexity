@@ -10,12 +10,21 @@ fun printWorkingDirectory() {
     println(Paths.get("").toAbsolutePath().toString())
 }
 
+/**
+ * Hardcoded path of the Frontend public folder
+ */
+const val DATA_OUTPUT_DIR = "/coding/personal/graph-visualisation/public"
+
 fun writeMetricsToFile(metrics: List<SizeMetric>) {
     val content = Json.encodeToJsonElement(metrics).toString()
 
+    // Java doesn't recognize '~' as the home directory
+    val home = System.getProperty("user.home")
+    val metricsFilePath = "$home/$DATA_OUTPUT_DIR/metrics.json"
+
     println("Writing metrics to file $content")
 
-    writeToFile("data/metrics.json", content)
+    writeToFile(metricsFilePath, content)
 }
 
 fun main() {
