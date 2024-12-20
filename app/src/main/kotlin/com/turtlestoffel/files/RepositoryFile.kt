@@ -5,7 +5,7 @@ import java.io.File
 const val IMPORT_KEYWORD = "import"
 
 /**
- * Represents any type of file in a [Repository]
+ * Represents any type of file in a [com.turtlestoffel.Repository]
  */
 open class RepositoryFile(
     file: File,
