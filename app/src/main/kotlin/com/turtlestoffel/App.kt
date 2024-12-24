@@ -46,6 +46,5 @@ fun main() {
             it.printFileCount()
             val metrics = FileSizeMetric(it.repositoryFiles.filterIsInstance<CodeFile>()).calculate()
             writeMetricsToFile(metrics)
-            //FileSizeMetric(it.sourceFiles).calculateHistogram()
         }
 }
