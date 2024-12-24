@@ -9,9 +9,9 @@ const val IMPORT_KEYWORD = "import"
  */
 open class RepositoryFile(
     file: File,
+    val path: String
 ) {
     val extension = file.extension
-    val path: String = file.path.removePrefix("repositories/")
 
     protected val content: String by lazy {
         file.readText()

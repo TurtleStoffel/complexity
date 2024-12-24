@@ -20,10 +20,11 @@ class Repository(
                 it.isFile
             }.map {
                 println("Processing file: ${it.path}")
+                val filePath = it.path.removePrefix("repositories/")
                 if (extensionMapper(it.extension) == FileType.CODE) {
-                    CodeFile(it)
+                    CodeFile(it, filePath)
                 } else {
-                    UnknownFile(it)
+                    UnknownFile(it, filePath)
                 }
             }
 
