@@ -4,6 +4,12 @@ import com.turtlestoffel.files.CodeFile
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class Export(
+    val repositoryName: String,
+    val sizeMetrics: List<SizeMetric>
+)
+
+@Serializable
 data class SizeMetric(
     val path: String,
     val filename: String,

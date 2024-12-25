@@ -10,6 +10,9 @@ import kotlin.io.path.relativeTo
 class Repository(
     path: Path,
 ) {
+    // fileName is the name of the directory
+    val name = path.fileName.toString()
+
     private val repositoryFiles: List<RepositoryFile> =
         File(path.toUri())
             .walk()

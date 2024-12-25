@@ -1,6 +1,5 @@
 package com.turtlestoffel
 
-import com.turtlestoffel.files.CodeFile
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToJsonElement
 import java.io.File
@@ -16,8 +15,8 @@ fun printWorkingDirectory() {
  */
 const val DATA_OUTPUT_DIR = "/coding/personal/graph-visualisation/public"
 
-fun writeMetricsToFile(metrics: List<SizeMetric>) {
-    val content = Json.encodeToJsonElement(metrics).toString()
+private fun writeExportToFile(export: Export) {
+    val content = Json.encodeToJsonElement(export).toString()
 
     // Java doesn't recognize '~' as the home directory
     val home = System.getProperty("user.home")
@@ -47,6 +46,7 @@ fun main() {
             it.printStatistics()
             it.printFileCount()
             val metrics = FileSizeMetric(it.codeFiles).calculate()
-            writeMetricsToFile(metrics)
+            val export = Export(it.name, metrics)
+            writeExportToFile(export)
         }
 }
