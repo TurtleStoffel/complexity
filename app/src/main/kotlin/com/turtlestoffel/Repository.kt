@@ -11,7 +11,7 @@ import kotlin.io.path.relativeTo
 class Repository(
     path: Path,
 ) {
-    val repositoryFiles: List<RepositoryFile> =
+    private val repositoryFiles: List<RepositoryFile> =
         File(path.toUri())
             .walk()
             .onEnter {
@@ -30,6 +30,8 @@ class Repository(
                     UnknownFile(it, filePath)
                 }
             }
+
+    val codeFiles = repositoryFiles.filterIsInstance<CodeFile>()
 
     init {
         println("Repository detected: $path")

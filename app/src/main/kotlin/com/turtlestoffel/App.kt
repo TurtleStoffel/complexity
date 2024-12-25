@@ -46,7 +46,7 @@ fun main() {
         }.forEach {
             it.printStatistics()
             it.printFileCount()
-            val metrics = FileSizeMetric(it.repositoryFiles.filterIsInstance<CodeFile>()).calculate()
+            val metrics = FileSizeMetric(it.codeFiles).calculate()
             writeMetricsToFile(metrics)
         }
 }
