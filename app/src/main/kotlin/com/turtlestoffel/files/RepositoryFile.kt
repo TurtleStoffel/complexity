@@ -10,7 +10,8 @@ const val IMPORT_KEYWORD = "import"
  */
 data class RepositoryFile(
     val content: String,
-    val path: Path
+    val path: Path,
 ) {
     val extension = path.extension
+    val filename = path.fileName
 }

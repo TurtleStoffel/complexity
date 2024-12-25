@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SizeMetric(
     val path: String,
+    val filename: String,
     val extension: String,
     val size: Int,
 )
@@ -17,6 +18,7 @@ class FileSizeMetric(
         return codeFiles.map {
             SizeMetric(
                 it.repositoryFile.path.toString(),
+                it.repositoryFile.filename.toString(),
                 it.repositoryFile.extension,
                 it.getNumberOfLines()
             )
