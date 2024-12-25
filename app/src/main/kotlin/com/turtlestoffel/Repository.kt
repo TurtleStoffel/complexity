@@ -2,7 +2,6 @@ package com.turtlestoffel
 
 import com.turtlestoffel.files.CodeFile
 import com.turtlestoffel.files.RepositoryFile
-import com.turtlestoffel.files.UnknownFile
 import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.Path
@@ -25,14 +24,16 @@ class Repository(
                 val filePath = Path(it.path).relativeTo(path)
                 println("Processing file: ${it.path}")
                 val content = it.readText()
-                if (extensionMapper(it.extension) == FileType.CODE) {
-                    CodeFile(content, filePath)
-                } else {
-                    UnknownFile(content, filePath)
-                }
+                RepositoryFile(content, filePath)
             }
 
-    val codeFiles = repositoryFiles.filterIsInstance<CodeFile>()
+    val codeFiles = repositoryFiles.mapNotNull {
+        if (extensionMapper(it.extension) == FileType.CODE) {
+            CodeFile(it)
+        } else {
+            null
+        }
+    }
 
     init {
         println("Repository detected: $path")
@@ -49,16 +50,13 @@ class Repository(
 
     fun printStatistics() {
         repositoryFiles.forEach {
-            when (it) {
-                is CodeFile -> {
-                    println("Code file detected: ${it.path}")
-                    it.getNumberOfLines()
-                    it.getNumberOfImports()
-                }
-                is UnknownFile -> {
-                    println("Unknown file detected: ${it.path}")
-                }
-                else -> throw IllegalArgumentException("Unsupported file type")
+            if (extensionMapper(it.extension) == FileType.CODE) {
+                val codeFile = CodeFile(it)
+                println("Code file detected: ${it.path}")
+                codeFile.getNumberOfLines()
+                codeFile.getNumberOfImports()
+            } else {
+                println("Unknown file detected: ${it.path}")
             }
         }
     }

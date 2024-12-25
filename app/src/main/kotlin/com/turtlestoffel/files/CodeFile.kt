@@ -1,14 +1,12 @@
 package com.turtlestoffel.files
 
-import java.nio.file.Path
-
-class CodeFile(content: String, path: Path) : RepositoryFile(content, path) {
+class CodeFile(val repositoryFile: RepositoryFile) {
 
     private val newLines: Int by lazy {
-        content.count { it == '\n' }
+        repositoryFile.content.count { it == '\n' }
     }
     private val numberOfImportStatements: Int by lazy {
-        content.windowed(IMPORT_KEYWORD.length).count { it == IMPORT_KEYWORD }
+        repositoryFile.content.windowed(IMPORT_KEYWORD.length).count { it == IMPORT_KEYWORD }
     }
 
     fun getNumberOfLines(): Int {

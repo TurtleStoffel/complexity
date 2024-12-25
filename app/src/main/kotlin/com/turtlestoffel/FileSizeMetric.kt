@@ -14,6 +14,12 @@ class FileSizeMetric(
     private val codeFiles: List<CodeFile>,
 ) {
     fun calculate(): List<SizeMetric> {
-        return codeFiles.map { SizeMetric(it.path.toString(), it.extension, it.getNumberOfLines()) }
+        return codeFiles.map {
+            SizeMetric(
+                it.repositoryFile.path.toString(),
+                it.repositoryFile.extension,
+                it.getNumberOfLines()
+            )
+        }
     }
 }
