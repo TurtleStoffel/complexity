@@ -24,10 +24,11 @@ class Repository(
             }.map {
                 val filePath = Path(it.path).relativeTo(path)
                 println("Processing file: ${it.path}")
+                val content = it.readText()
                 if (extensionMapper(it.extension) == FileType.CODE) {
-                    CodeFile(it, filePath)
+                    CodeFile(content, filePath)
                 } else {
-                    UnknownFile(it, filePath)
+                    UnknownFile(content, filePath)
                 }
             }
 

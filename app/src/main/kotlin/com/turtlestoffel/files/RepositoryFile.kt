@@ -10,16 +10,12 @@ const val IMPORT_KEYWORD = "import"
  * Represents any type of file in a [com.turtlestoffel.Repository]
  */
 open class RepositoryFile(
-    file: File,
+    val content: String,
     val path: Path
 ) {
     val extension = path.extension
 
-    protected val content: String by lazy {
-        file.readText()
-    }
-
     init {
-        println("Read source file at path ${file.path}")
+        println("Read source file at path $path")
     }
 }
