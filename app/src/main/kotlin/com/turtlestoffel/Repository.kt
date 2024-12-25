@@ -22,7 +22,7 @@ class Repository(
                 // Ignore directories
                 it.isFile
             }.map {
-                val filePath = Path(it.path).relativeTo(path).toString()
+                val filePath = Path(it.path).relativeTo(path)
                 println("Processing file: ${it.path}")
                 if (extensionMapper(it.extension) == FileType.CODE) {
                     CodeFile(it, filePath)

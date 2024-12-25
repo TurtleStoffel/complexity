@@ -1,8 +1,9 @@
 package com.turtlestoffel.files
 
 import java.io.File
+import java.nio.file.Path
 
-class CodeFile(file: File, path: String) : RepositoryFile(file, path) {
+class CodeFile(file: File, path: Path) : RepositoryFile(file, path) {
 
     private val newLines: Int by lazy {
         content.count { it == '\n' }

@@ -1,6 +1,8 @@
 package com.turtlestoffel.files
 
 import java.io.File
+import java.nio.file.Path
+import kotlin.io.path.extension
 
 const val IMPORT_KEYWORD = "import"
 
@@ -9,9 +11,9 @@ const val IMPORT_KEYWORD = "import"
  */
 open class RepositoryFile(
     file: File,
-    val path: String
+    val path: Path
 ) {
-    val extension = file.extension
+    val extension = path.extension
 
     protected val content: String by lazy {
         file.readText()
