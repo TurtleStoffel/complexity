@@ -4,12 +4,15 @@ import com.turtlestoffel.files.CodeFile
 import com.turtlestoffel.files.RepositoryFile
 import com.turtlestoffel.files.UnknownFile
 import java.io.File
+import java.nio.file.Path
+import kotlin.io.path.Path
+import kotlin.io.path.relativeTo
 
 class Repository(
-    path: String,
+    path: Path,
 ) {
     val repositoryFiles: List<RepositoryFile> =
-        File(path)
+        File(path.toUri())
             .walk()
             .onEnter {
                 // Ignore hidden directories such as .git
@@ -19,8 +22,8 @@ class Repository(
                 // Ignore directories
                 it.isFile
             }.map {
+                val filePath = Path(it.path).relativeTo(path).toString()
                 println("Processing file: ${it.path}")
-                val filePath = it.path.removePrefix("repositories/")
                 if (extensionMapper(it.extension) == FileType.CODE) {
                     CodeFile(it, filePath)
                 } else {

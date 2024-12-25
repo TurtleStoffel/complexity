@@ -5,6 +5,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToJsonElement
 import java.io.File
 import java.nio.file.Paths
+import kotlin.io.path.Path
 
 fun printWorkingDirectory() {
     println(Paths.get("").toAbsolutePath().toString())
@@ -40,7 +41,8 @@ fun main() {
             // Filter hidden folders
             !it.startsWith(".")
         }.map {
-            Repository("repositories/$it")
+            val path = Path("repositories/$it").toAbsolutePath()
+            Repository(path)
         }.forEach {
             it.printStatistics()
             it.printFileCount()
