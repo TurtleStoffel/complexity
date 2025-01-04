@@ -24,8 +24,8 @@ fun calculateFileMetrics(codeFiles: List<CodeFile>): List<FileMetric> {
             it.repositoryFile.path.toString(),
             it.repositoryFile.filename.toString(),
             it.repositoryFile.extension,
-            it.getNumberOfLines(),
-            it.getNumberOfImports()
+            it.newLines,
+            it.numberOfImportStatements
         )
     }
 }
