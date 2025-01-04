@@ -3,8 +3,6 @@ package com.turtlestoffel.files
 import java.nio.file.Path
 import kotlin.io.path.extension
 
-const val IMPORT_KEYWORD = "import"
-
 /**
  * Represents any type of file in a [com.turtlestoffel.Repository]
  */
