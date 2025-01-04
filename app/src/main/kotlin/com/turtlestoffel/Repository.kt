@@ -52,10 +52,7 @@ class Repository(
     fun printStatistics() {
         repositoryFiles.forEach {
             if (extensionMapper(it.extension) == FileType.CODE) {
-                val codeFile = CodeFile(it)
                 println("Code file detected: ${it.path}")
-                codeFile.getNumberOfLines()
-                codeFile.getNumberOfImports()
             } else {
                 println("Unknown file detected: ${it.path}")
             }
