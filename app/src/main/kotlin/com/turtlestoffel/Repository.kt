@@ -30,11 +30,13 @@ class Repository(
                 RepositoryFile(content, filePath)
             }
 
-    val codeFiles = repositoryFiles.filter {
-            extensionMapper(it.extension) == FileType.CODE
-        }.map {
-            CodeFile(it)
-        }
+    val codeFiles =
+        repositoryFiles
+            .filter {
+                extensionMapper(it.extension) == FileType.CODE
+            }.map {
+                CodeFile(it)
+            }
 
     init {
         println("Repository detected: $path")

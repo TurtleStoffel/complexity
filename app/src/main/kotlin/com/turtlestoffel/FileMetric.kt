@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Export(
     val repositoryName: String,
-    val fileMetrics: List<FileMetric>
+    val fileMetrics: List<FileMetric>,
 )
 
 @Serializable
@@ -18,14 +18,13 @@ data class FileMetric(
     val numberOfImports: Int,
 )
 
-fun calculateFileMetrics(codeFiles: List<CodeFile>): List<FileMetric> {
-    return codeFiles.map {
+fun calculateFileMetrics(codeFiles: List<CodeFile>): List<FileMetric> =
+    codeFiles.map {
         FileMetric(
             it.repositoryFile.path.toString(),
             it.repositoryFile.filename.toString(),
             it.repositoryFile.extension,
             it.newLines,
-            it.numberOfImportStatements
+            it.numberOfImportStatements,
         )
     }
-}

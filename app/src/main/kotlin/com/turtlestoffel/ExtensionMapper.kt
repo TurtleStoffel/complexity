@@ -6,9 +6,8 @@ enum class FileType {
     UNKNOWN,
 }
 
-fun extensionMapper(extension: String): FileType {
-    return when (extension) {
+fun extensionMapper(extension: String): FileType =
+    when (extension) {
         "ts" -> FileType.CODE
         else -> FileType.UNKNOWN
     }
-}
