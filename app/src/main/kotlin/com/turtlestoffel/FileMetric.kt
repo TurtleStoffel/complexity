@@ -15,6 +15,7 @@ data class FileMetric(
     val filename: String,
     val extension: String,
     val size: Int,
+    val numberOfImports: Int,
 )
 
 fun calculateFileMetrics(codeFiles: List<CodeFile>): List<FileMetric> {
@@ -23,7 +24,8 @@ fun calculateFileMetrics(codeFiles: List<CodeFile>): List<FileMetric> {
             it.repositoryFile.path.toString(),
             it.repositoryFile.filename.toString(),
             it.repositoryFile.extension,
-            it.getNumberOfLines()
+            it.getNumberOfLines(),
+            it.getNumberOfImports()
         )
     }
 }
