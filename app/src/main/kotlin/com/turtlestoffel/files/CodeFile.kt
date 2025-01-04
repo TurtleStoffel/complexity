@@ -8,6 +8,8 @@ class CodeFile(val repositoryFile: RepositoryFile) {
         repositoryFile.content.count { it == '\n' } + 1
     }
     val numberOfImportStatements: Int by lazy {
-        repositoryFile.content.windowed(IMPORT_KEYWORD.length).count { it == IMPORT_KEYWORD }
+        val importRegex = Regex("""${IMPORT_KEYWORD}\s+.*""")
+        val result = importRegex.findAll(repositoryFile.content)
+        result.count()
     }
 }
