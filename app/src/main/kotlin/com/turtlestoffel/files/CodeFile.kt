@@ -9,9 +9,22 @@ class CodeFile(
         // + 1 needed to account for the last line that doesn't end with a newline character
         repositoryFile.content.count { it == '\n' } + 1
     }
-    val numberOfImportStatements: Int by lazy {
+    val totalImportStatements: Int by lazy {
+        importStatements.size
+    }
+    val totalInternalImportStatements: Int by lazy {
+        importStatements
+            .filter {
+                val regex = Regex(""".* from (.*)""")
+                val (importFile) = regex.find(it)?.destructured!!
+                println(importFile)
+
+                importFile.startsWith("'./")
+            }.size
+    }
+    val importStatements: List<String> by lazy {
         val importRegex = Regex("""${IMPORT_KEYWORD}\s+.*""")
         val result = importRegex.findAll(repositoryFile.content)
-        result.count()
+        result.map { it.value }.toList()
     }
 }
