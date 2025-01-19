@@ -45,6 +45,7 @@ fun main() {
         }.forEach {
             it.printStatistics()
             it.printFileCount()
+            it.calculateTimesFilesChanged()
             val metrics = calculateFileMetrics(it.codeFiles)
             val export = Export(it.name, metrics)
             writeExportToFile(export)

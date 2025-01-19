@@ -8,9 +8,9 @@ import kotlin.io.path.Path
 import kotlin.io.path.relativeTo
 
 class Repository(
-    path: Path,
+    private val path: Path,
 ) {
-    // fileName is the name of the directory
+    // fileName is the name of the directory containing the repository
     val name = path.fileName.toString()
 
     private val repositoryFiles: List<RepositoryFile> =
@@ -59,5 +59,10 @@ class Repository(
                 println("Unknown file detected: ${it.path}")
             }
         }
+    }
+
+    fun calculateTimesFilesChanged() {
+        val scriptResult = "git log -n 10 --pretty='' --name-only | sort | uniq -c | sort -n".runCommand(File(path.toUri()))
+        println("Ran script with result: $scriptResult")
     }
 }

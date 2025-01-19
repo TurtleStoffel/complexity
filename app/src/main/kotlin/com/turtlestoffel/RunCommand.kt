@@ -6,15 +6,19 @@ import java.util.concurrent.TimeUnit
 
 fun String.runCommand(workingDir: File): String? {
     try {
-        val parts = this.split("\\s".toRegex())
+        // Invoking a shell is required for executing pipelines (e.g., 'ls | grep foo')
         val proc =
-            ProcessBuilder(*parts.toTypedArray())
+            ProcessBuilder("/bin/sh", "-c", this)
                 .directory(workingDir)
                 .redirectOutput(ProcessBuilder.Redirect.PIPE)
                 .redirectError(ProcessBuilder.Redirect.PIPE)
                 .start()
 
         proc.waitFor(60, TimeUnit.MINUTES)
+        proc.errorStream
+            .bufferedReader()
+            .readText()
+            .also { println(it) }
         return proc.inputStream.bufferedReader().readText()
     } catch (e: IOException) {
         e.printStackTrace()
