@@ -13,7 +13,7 @@ class Repository(
     // fileName is the name of the directory containing the repository
     val name = path.fileName.toString()
 
-    private val repositoryFiles: List<RepositoryFile> =
+    val files: List<RepositoryFile> =
         File(path.toUri())
             .walk()
             .onEnter {
@@ -30,7 +30,7 @@ class Repository(
             }
 
     val codeFiles =
-        repositoryFiles
+        files
             .filter {
                 extensionMapper(it.extension) == FileType.CODE
             }.map {
@@ -41,17 +41,8 @@ class Repository(
         println("Repository detected: $path")
     }
 
-    fun printFileCount() {
-        val fileCount = repositoryFiles.size
-        val filesByExtension = repositoryFiles.groupBy { it.extension }.mapValues { it.value.size }
-        val typeScriptFileCount = filesByExtension["ts"] ?: 0
-        println("Files by extension: $filesByExtension")
-        println("Number of files in repository: $fileCount")
-        println("Number of TypeScript files in repository: $typeScriptFileCount")
-    }
-
     fun printStatistics() {
-        repositoryFiles.forEach {
+        files.forEach {
             if (extensionMapper(it.extension) == FileType.CODE) {
                 println("Code file detected: ${it.relativePath}")
             } else {

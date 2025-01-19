@@ -1,6 +1,7 @@
 package com.turtlestoffel
 
 import com.turtlestoffel.metrics.fileChangeFrequency
+import com.turtlestoffel.metrics.printFileCount
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToJsonElement
 import java.io.File
@@ -45,7 +46,7 @@ fun main() {
             Repository(path)
         }.forEach {
             it.printStatistics()
-            it.printFileCount()
+            printFileCount(it)
             fileChangeFrequency(it.path)
             val metrics = calculateFileMetrics(it.codeFiles)
             val export = Export(it.name, metrics)
