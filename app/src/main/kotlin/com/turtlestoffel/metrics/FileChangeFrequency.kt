@@ -1,6 +1,6 @@
 package com.turtlestoffel.metrics
 
-import com.turtlestoffel.runCommand
+import com.turtlestoffel.util.runCommand
 import java.io.File
 import java.nio.file.Path
 
