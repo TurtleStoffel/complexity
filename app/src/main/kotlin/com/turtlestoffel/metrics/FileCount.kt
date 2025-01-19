@@ -1,6 +1,6 @@
 package com.turtlestoffel.metrics
 
-import com.turtlestoffel.Repository
+import com.turtlestoffel.repository.Repository
 
 fun printFileCount(repository: Repository) {
     val fileCount = repository.files.size

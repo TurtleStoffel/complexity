@@ -1,4 +1,4 @@
-package com.turtlestoffel
+package com.turtlestoffel.repository
 
 enum class FileType {
     CODE,

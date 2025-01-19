@@ -2,6 +2,8 @@ package com.turtlestoffel
 
 import com.turtlestoffel.metrics.fileChangeFrequency
 import com.turtlestoffel.metrics.printFileCount
+import com.turtlestoffel.repository.Repository
+import com.turtlestoffel.repository.RepositoryManager
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToJsonElement
 import java.io.File

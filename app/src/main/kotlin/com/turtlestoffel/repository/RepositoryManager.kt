@@ -1,4 +1,4 @@
-package com.turtlestoffel
+package com.turtlestoffel.repository
 
 import com.charleskorn.kaml.Yaml
 import kotlinx.serialization.Serializable
