@@ -26,8 +26,7 @@ class Repository(
             }.map {
                 val filePath = Path(it.path).relativeTo(path)
                 println("Processing file: ${it.path}")
-                val content = it.readText()
-                RepositoryFile(content, filePath, Path(it.path).toAbsolutePath())
+                RepositoryFile(filePath, Path(it.path).toAbsolutePath())
             }
 
     val codeFiles =
