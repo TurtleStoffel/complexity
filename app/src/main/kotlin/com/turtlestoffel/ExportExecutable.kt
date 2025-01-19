@@ -1,5 +1,8 @@
 package com.turtlestoffel
 
+import com.turtlestoffel.export.Export
+import com.turtlestoffel.export.calculateFileMetrics
+import com.turtlestoffel.export.writeToFile
 import com.turtlestoffel.metrics.fileChangeFrequency
 import com.turtlestoffel.metrics.printFileCount
 import com.turtlestoffel.repository.Repository
