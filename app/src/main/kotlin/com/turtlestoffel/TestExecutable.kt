@@ -9,7 +9,7 @@ fun main() {
     val rawPath = "repositories/vscode/src/vs/editor/common/cursorCommon.ts"
     val path = Path(rawPath)
     val content = File(rawPath).readText()
-    val repositoryFile = RepositoryFile(content, path)
+    val repositoryFile = RepositoryFile(content, path, path.toAbsolutePath())
 
     val codeFile = CodeFile(repositoryFile)
     codeFile.importStatements.forEach {

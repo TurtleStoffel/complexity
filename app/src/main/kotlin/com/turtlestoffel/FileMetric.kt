@@ -21,7 +21,7 @@ data class FileMetric(
 fun calculateFileMetrics(codeFiles: List<CodeFile>): List<FileMetric> =
     codeFiles.map {
         FileMetric(
-            it.repositoryFile.path.toString(),
+            it.repositoryFile.relativePath.toString(),
             it.repositoryFile.filename.toString(),
             it.repositoryFile.extension,
             it.newLines,

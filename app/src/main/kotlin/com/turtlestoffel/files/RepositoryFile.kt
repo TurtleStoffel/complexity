@@ -8,8 +8,9 @@ import kotlin.io.path.extension
  */
 data class RepositoryFile(
     val content: String,
-    val path: Path,
+    val relativePath: Path,
+    private val absolutePath: Path,
 ) {
-    val extension = path.extension
-    val filename = path.fileName
+    val extension = relativePath.extension
+    val filename: Path = relativePath.fileName
 }

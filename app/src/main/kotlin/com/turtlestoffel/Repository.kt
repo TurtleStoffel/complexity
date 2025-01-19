@@ -27,7 +27,7 @@ class Repository(
                 val filePath = Path(it.path).relativeTo(path)
                 println("Processing file: ${it.path}")
                 val content = it.readText()
-                RepositoryFile(content, filePath)
+                RepositoryFile(content, filePath, Path(it.path).toAbsolutePath())
             }
 
     val codeFiles =
@@ -54,9 +54,9 @@ class Repository(
     fun printStatistics() {
         repositoryFiles.forEach {
             if (extensionMapper(it.extension) == FileType.CODE) {
-                println("Code file detected: ${it.path}")
+                println("Code file detected: ${it.relativePath}")
             } else {
-                println("Unknown file detected: ${it.path}")
+                println("Unknown file detected: ${it.relativePath}")
             }
         }
     }
