@@ -1,6 +1,6 @@
 package com.turtlestoffel.files
 
-import com.turtlestoffel.runCommand
+import com.turtlestoffel.util.runCommand
 import java.io.File
 
 private const val IMPORT_KEYWORD = "import"
@@ -26,12 +26,16 @@ class CodeFile(
             }.size
     }
     val importStatements: List<String> by lazy {
-        val home = System.getProperty("user.home")
-        val typeScriptParserPath = "$home/coding/personal/complexity-typescript-parser/"
-        val scriptResult = "deno run -A main.ts ${repositoryFile.path.toAbsolutePath()}".runCommand(File(typeScriptParserPath))
-        println("Ran script with result: $scriptResult")
+        // parseImportsFromAST(repositoryFile.absolutePath.toString())
         val importRegex = Regex("""${IMPORT_KEYWORD}\s+.*""")
         val result = importRegex.findAll(repositoryFile.content)
         result.map { it.value }.toList()
     }
+}
+
+private fun parseImportsFromAST(path: String) {
+    val home = System.getProperty("user.home")
+    val typeScriptParserPath = "$home/coding/personal/complexity-typescript-parser/"
+    val scriptResult = "deno run -A main.ts $path".runCommand(File(typeScriptParserPath))
+    println("Ran script with result: $scriptResult")
 }
