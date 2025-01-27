@@ -1,6 +1,7 @@
 package com.turtlestoffel.repository
 
 import com.charleskorn.kaml.Yaml
+import com.turtlestoffel.util.runCommand
 import kotlinx.serialization.Serializable
 import java.io.File
 
@@ -24,14 +25,25 @@ class RepositoryManager {
                         !it.startsWith(".")
                     }.toSet()
 
-            val unrecognizedRepositories = repositories.minus(config.repositories.toSet())
-            require(unrecognizedRepositories.isEmpty()) {
-                "Unrecognized repositories found in the repositories folder: $unrecognizedRepositories"
+            val repositoryNameToUrl =
+                config.repositories.associateBy {
+                    it.split("/").last()
+                }
+
+            val configuredRepositories = repositoryNameToUrl.keys
+
+            val unconfiguredRepositories = repositories.minus(configuredRepositories)
+            require(unconfiguredRepositories.isEmpty()) {
+                "Unrecognized repositories found in the repositories folder: $unconfiguredRepositories"
             }
 
-            val unreplicatedRepositories = config.repositories.minus(repositories)
+            val unreplicatedRepositories = configuredRepositories.minus(repositories)
             if (unreplicatedRepositories.isNotEmpty()) {
                 println("Found repositories that haven't been replicated yet")
+                unreplicatedRepositories.forEach {
+                    val result = "git clone ${repositoryNameToUrl[it]}".runCommand(File(REPOSITORIES_FOLDER))
+                    println("Cloned repository $it with result $result")
+                }
             }
         }
 

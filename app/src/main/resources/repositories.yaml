@@ -1,2 +1,3 @@
 repositories:
-  - vscode
+  - https://github.com/microsoft/vscode
+  - https://github.com/Koenkk/zigbee2mqtt
